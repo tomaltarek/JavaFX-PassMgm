@@ -1,7 +1,10 @@
 package model;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import util.DBUtil;
 
 public class UserDAO {
@@ -16,5 +19,44 @@ public class UserDAO {
 			throw e; 
 		}
 	}
+	
+//showing records
+	public static ObservableList<User> getAllRecords() throws ClassNotFoundException,SQLException{
+		String sql="select * from users";
+		try {
+			ResultSet rSet=DBUtil.dbExecute(sql);
+			ObservableList<User> userList=getUserObjects(rSet);
+			return userList;
+			
+		} catch (Exception e) {
+			System.out.println("Error at fetching records"+e);
+			e.printStackTrace();
+			throw e; 
+		}
+		
+	
+	}
+
+private static ObservableList<User> getUserObjects(ResultSet rSet) throws SQLException,ClassNotFoundException {
+	try {
+		ObservableList<User> userlist=FXCollections.observableArrayList();
+		while (rSet.next()) {
+			User user=new User();
+			user.setDescription(rSet.getString("description"));
+			user.setUserName(rSet.getString("username"));
+			user.setPassword(rSet.getString("password"));
+			userlist.add(user);
+		}
+		return userlist;
+		
+		
+	} catch (Exception e) {
+		System.out.println("Error at fetching records"+e);
+		e.printStackTrace();
+		throw e; 
+	}
+	
+	
+}
 
 }
