@@ -12,7 +12,7 @@
       <Button layoutX="116.0" layoutY="134.0" mnemonicParsing="false" onAction="#insertUser" prefHeight="25.0" prefWidth="79.0" text="Add User" />
       <TextField fx:id="txtUsername" layoutX="116.0" layoutY="72.0" />
       <TextField fx:id="txtPassword" layoutX="116.0" layoutY="99.0" />
-      <TableView layoutX="25.0" layoutY="216.0" prefHeight="301.0" prefWidth="633.0">
+      <TableView fx:id="userTable" layoutX="25.0" layoutY="216.0" prefHeight="301.0" prefWidth="633.0">
         <columns>
           <TableColumn fx:id="colDescription" prefWidth="276.0" text="Description" />
           <TableColumn fx:id="colUserName" prefWidth="170.0" text="User Name" />

@@ -5,9 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.sql.rowset.CachedRowSet;
-
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import com.sun.rowset.CachedRowSetImpl;
 
 public class DBUtil {
@@ -81,8 +78,15 @@ public class DBUtil {
     	dbConnect();
     	statement=connection.createStatement();
     	rs=statement.executeQuery(sqlQuery);
+    	
+    	if (!rs.next() ) {
+    	    System.out.println("no data");
+    	} 
     	crs=new CachedRowSetImpl();
     	crs.populate(rs);
+    	
+    
+       
 		
 	} catch (Exception e) {
 		System.out.println("Hit error while running dbExecute"+e);
@@ -93,7 +97,9 @@ public class DBUtil {
 		if (statement!=null) statement.close();
 	}
     dbDisconnect();
+
 	return crs;
+	
     }
    
     

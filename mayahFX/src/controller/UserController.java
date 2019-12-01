@@ -28,7 +28,7 @@ private TableColumn<User, String> colUserName;
 @FXML
 private TableColumn<User, String> colPassword; 
 @FXML
-private TableView<User>  userTable; 
+private TableView  userTable; 
 
 @FXML
 private void insertUser(ActionEvent event)throws ClassNotFoundException,SQLException{
@@ -43,12 +43,15 @@ private void initialize()throws Exception{
 	colUserName.setCellValueFactory(cellData->new ReadOnlyStringWrapper( cellData.getValue().getUserName()));
 	colPassword.setCellValueFactory(cellData->new ReadOnlyStringWrapper( cellData.getValue().getPassword()));
 	ObservableList<User> userList=UserDAO.getAllRecords();
+	
 	populateTable(userList);
 }
 
 
 private void populateTable(ObservableList<User> userList) {
+	
 	userTable.setItems(userList);
+	 
 }
 
 }

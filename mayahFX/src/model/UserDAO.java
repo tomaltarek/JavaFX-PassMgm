@@ -25,7 +25,7 @@ public class UserDAO {
 		String sql="select * from users";
 		try {
 			ResultSet rSet=DBUtil.dbExecute(sql);
-			ObservableList<User> userList=getUserObjects(rSet);
+			ObservableList<User> userList=getUserObjects(rSet);			
 			return userList;
 			
 		} catch (Exception e) {
@@ -42,11 +42,13 @@ private static ObservableList<User> getUserObjects(ResultSet rSet) throws SQLExc
 		ObservableList<User> userlist=FXCollections.observableArrayList();
 		while (rSet.next()) {
 			User user=new User();
-			user.setDescription(rSet.getString("description"));
+			user.setDescription(rSet.getString("description"));			
 			user.setUserName(rSet.getString("username"));
 			user.setPassword(rSet.getString("password"));
 			userlist.add(user);
+			
 		}
+		
 		return userlist;
 		
 		
