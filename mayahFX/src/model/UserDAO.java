@@ -20,6 +20,19 @@ public class UserDAO {
 		}
 	}
 	
+	public static void updatetUser(String description,String userName,String password, String old_username)throws SQLException, ClassNotFoundException {
+		String sql="update users set description='"+description+"',username='"+userName+"',password='"+password+"' where username='"+old_username+"' ";
+		try {
+			DBUtil.dbExecuteQuery(sql);
+			
+		} catch (SQLException e) {
+			System.out.println("Error updating record"+e);
+			e.printStackTrace();
+			throw e; 
+		}
+	}
+	
+	
 //showing records
 	public static ObservableList<User> getAllRecords() throws ClassNotFoundException,SQLException{
 		String sql="select * from users";

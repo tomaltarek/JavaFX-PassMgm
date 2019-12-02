@@ -18,6 +18,7 @@ import model.UserDAO;
 
 
 public class UserController {
+private String oldUser=null; 
 @FXML
 private TextField txtDescription;
 @FXML
@@ -40,17 +41,30 @@ private TableView  userTable;
 
 @FXML
 private void insertUser(ActionEvent event)throws Exception{
-	UserDAO.insertUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText());
-	initialize();
-	clearFields();
+	try {
+		UserDAO.insertUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText());
+		initialize();
+		clearFields();
+		
+	} catch (SQLException e) {
+		System.out.println("Hit error while inserting"+e);
+		e.printStackTrace();
+		throw e; 
+	}
+	
+	
 }
 @FXML
-private void pickrow(ActionEvent actionEvent) throws Exception {
-	User usr= (User) userTable.getSelectionModel().getSelectedItem();
-	txtDescription.setText(usr.getDescription());
-	txtUsername.setText(usr.getUserName());
-	txtPassword.setText(usr.getPassword());
-	insertButton.setDisable(true);
+private void updateUser(ActionEvent event) throws Exception{
+	try {
+		UserDAO.updatetUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText(), oldUser);
+		initialize();
+		clearFields();
+	} catch (SQLException e) {
+		System.out.println("Hit error while updating"+e);
+		e.printStackTrace();
+		throw e; 
+	}
 	
 }
 
@@ -64,6 +78,7 @@ public void clickItem(MouseEvent event)
     	txtUsername.setText(usr.getUserName());
     	txtPassword.setText(usr.getPassword());
     	insertButton.setDisable(true);
+    	oldUser=usr.getUserName();
     }
 }
 
