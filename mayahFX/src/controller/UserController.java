@@ -6,11 +6,15 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import model.User;
 import model.UserDAO;
+
 
 
 public class UserController {
@@ -20,6 +24,8 @@ private TextField txtDescription;
 private TextField txtUsername;
 @FXML
 private TextField txtPassword; 
+@FXML
+private Button insertButton;
 
 @FXML
 private TableColumn<User, String> colDescription;
@@ -30,10 +36,45 @@ private TableColumn<User, String> colPassword;
 @FXML
 private TableView  userTable; 
 
+
+
 @FXML
-private void insertUser(ActionEvent event)throws ClassNotFoundException,SQLException{
+private void insertUser(ActionEvent event)throws Exception{
 	UserDAO.insertUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText());
+	initialize();
+	clearFields();
 }
+@FXML
+private void pickrow(ActionEvent actionEvent) throws Exception {
+	User usr= (User) userTable.getSelectionModel().getSelectedItem();
+	txtDescription.setText(usr.getDescription());
+	txtUsername.setText(usr.getUserName());
+	txtPassword.setText(usr.getPassword());
+	insertButton.setDisable(true);
+	
+}
+
+@FXML
+public void clickItem(MouseEvent event)
+{
+    if (event.getClickCount() == 2) //Checking double click
+    {
+    	User usr= (User) userTable.getSelectionModel().getSelectedItem();
+    	txtDescription.setText(usr.getDescription());
+    	txtUsername.setText(usr.getUserName());
+    	txtPassword.setText(usr.getPassword());
+    	insertButton.setDisable(true);
+    }
+}
+
+
+private void clearFields(){
+	txtDescription.setText(null);
+	txtUsername.setText(null);
+	txtPassword.setText(null);
+}
+
+
 
 @FXML
 private void initialize()throws Exception{
@@ -44,14 +85,20 @@ private void initialize()throws Exception{
 	colPassword.setCellValueFactory(cellData->new ReadOnlyStringWrapper( cellData.getValue().getPassword()));
 	ObservableList<User> userList=UserDAO.getAllRecords();
 	
+	
+	
 	populateTable(userList);
+	
+	
 }
 
 
 private void populateTable(ObservableList<User> userList) {
 	
 	userTable.setItems(userList);
+	
 	 
 }
+
 
 }
