@@ -1,33 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="534.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserController">
    <children>
-      <Button fx:id="insertButton" layoutX="116.0" layoutY="134.0" mnemonicParsing="false" onAction="#insertUser" prefHeight="25.0" prefWidth="79.0" text="Add User" />
-      <TextField fx:id="txtUsername" layoutX="116.0" layoutY="72.0" />
-      <TextField fx:id="txtPassword" layoutX="116.0" layoutY="99.0" />
-      <TableView fx:id="userTable" blendMode="SCREEN" layoutX="25.0" layoutY="216.0" onMousePressed="#clickItem" prefHeight="301.0" prefWidth="633.0">
+      <Button fx:id="insertButton" layoutX="116.0" layoutY="142.0" mnemonicParsing="false" onAction="#insertUser" prefHeight="25.0" prefWidth="79.0" text="Add User" />
+      <TextField fx:id="txtUsername" layoutX="116.0" layoutY="72.0" promptText="insert username" />
+      <TextField fx:id="txtPassword" layoutX="116.0" layoutY="99.0" promptText="insert password" />
+      <TableView fx:id="userTable" layoutX="25.0" layoutY="174.0" onMousePressed="#clickItem" prefHeight="346.0" prefWidth="633.0" tableMenuButtonVisible="true">
         <columns>
           <TableColumn fx:id="colDescription" prefWidth="276.0" text="Description" />
           <TableColumn fx:id="colUserName" prefWidth="170.0" text="User Name" />
             <TableColumn fx:id="colPassword" prefWidth="186.0" text="Password" />
         </columns>
-         <effect>
-            <Glow />
-         </effect>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
       </TableView>
-      <TextField fx:id="txtDescription" layoutX="116.0" layoutY="45.0" prefHeight="25.0" prefWidth="296.0" />
+      <TextField fx:id="txtDescription" layoutX="116.0" layoutY="45.0" prefHeight="25.0" prefWidth="296.0" promptText="insert description" />
       <Label layoutX="44.0" layoutY="49.0" text="Description" />
       <Label layoutX="45.0" layoutY="75.0" text="User Name" />
       <Label layoutX="45.0" layoutY="103.0" text="Password" />
-      <Button layoutX="198.0" layoutY="134.0" mnemonicParsing="false" onAction="#updateUser" text="Update User" />
-      <Button layoutX="282.0" layoutY="134.0" mnemonicParsing="false" text="Delete User" textFill="#e8131a" />
+      <Button layoutX="198.0" layoutY="142.0" mnemonicParsing="false" onAction="#updateUser" text="Update User" />
+      <Button layoutX="282.0" layoutY="142.0" mnemonicParsing="false" onAction="#clearFields" text="Clear" />
+      <Label layoutX="116.0" layoutY="123.0" text="All are required fields" textFill="#9e8e8e">
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
+      <MenuBar layoutX="638.0" opacity="0.7" prefHeight="25.0" prefWidth="29.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="▷">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#clearFields" text="Clear" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
+                  <MenuItem mnemonicParsing="false" text="Change PIN" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
    </children>
 </AnchorPane>

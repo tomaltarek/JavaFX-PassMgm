@@ -1,14 +1,15 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.TimerTask;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -18,7 +19,7 @@ import model.UserDAO;
 
 
 public class UserController {
-private String oldUser=null; 
+private String oldDesc=null; 
 @FXML
 private TextField txtDescription;
 @FXML
@@ -42,9 +43,12 @@ private TableView  userTable;
 @FXML
 private void insertUser(ActionEvent event)throws Exception{
 	try {
-		UserDAO.insertUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText());
-		initialize();
-		clearFields();
+		if (!isAnyFieldsBlank())
+		{
+			UserDAO.insertUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText());			
+			initialize();
+			clearFields();
+		}			
 		
 	} catch (SQLException e) {
 		System.out.println("Hit error while inserting"+e);
@@ -57,11 +61,55 @@ private void insertUser(ActionEvent event)throws Exception{
 @FXML
 private void updateUser(ActionEvent event) throws Exception{
 	try {
-		UserDAO.updatetUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText(), oldUser);
-		initialize();
-		clearFields();
+		if (!isAnyFieldsBlank())
+		{
+			UserDAO.updatetUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText(), oldDesc);
+			initialize();
+			clearFields();
+		}		
+		
 	} catch (SQLException e) {
 		System.out.println("Hit error while updating"+e);
+		e.printStackTrace();
+		throw e; 
+	}
+	
+}
+
+@FXML
+private void deleteUser(ActionEvent event) throws Exception{
+	try {
+		
+		if (!(txtDescription.getText().isEmpty()))
+		{
+			UserDAO.deletetUser(txtDescription.getText());
+			initialize();
+			clearFields();
+		}
+		
+		
+	} catch (SQLException e) {
+		System.out.println("Hit error while deleting"+e);
+		e.printStackTrace();
+		throw e; 
+	}
+	
+}
+
+@FXML
+private void searchUser(ActionEvent event) throws Exception{
+	try {
+		
+		if (!(txtDescription.getText().isEmpty()))
+		{
+			UserDAO.deletetUser(txtDescription.getText());
+			initialize();
+			clearFields();
+		}
+		
+		
+	} catch (SQLException e) {
+		System.out.println("Hit error while deleting"+e);
 		e.printStackTrace();
 		throw e; 
 	}
@@ -78,15 +126,19 @@ public void clickItem(MouseEvent event)
     	txtUsername.setText(usr.getUserName());
     	txtPassword.setText(usr.getPassword());
     	insertButton.setDisable(true);
-    	oldUser=usr.getUserName();
+    	oldDesc=usr.getDescription();
     }
 }
 
-
+@FXML
 private void clearFields(){
-	txtDescription.setText(null);
-	txtUsername.setText(null);
-	txtPassword.setText(null);
+	txtDescription.setText("");
+	txtUsername.setText("");
+	txtPassword.setText("");
+	if (insertButton.isDisable())
+	{
+	insertButton.setDisable(false);
+    }
 }
 
 
@@ -100,13 +152,11 @@ private void initialize()throws Exception{
 	colPassword.setCellValueFactory(cellData->new ReadOnlyStringWrapper( cellData.getValue().getPassword()));
 	ObservableList<User> userList=UserDAO.getAllRecords();
 	
-	
-	
 	populateTable(userList);
+	//noticeLabel.setVisible(false);
 	
 	
 }
-
 
 private void populateTable(ObservableList<User> userList) {
 	
@@ -115,5 +165,14 @@ private void populateTable(ObservableList<User> userList) {
 	 
 }
 
+//validation checking if any text field is blank
+private boolean isAnyFieldsBlank() {
+	boolean status=false;
+	if (txtDescription.getText().isEmpty()||txtUsername.getText().isEmpty()||txtPassword.getText().isEmpty()) 
+	{
+		status=true;
+	}
+	return status; 
+}
 
 }

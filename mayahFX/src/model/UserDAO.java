@@ -20,8 +20,8 @@ public class UserDAO {
 		}
 	}
 	
-	public static void updatetUser(String description,String userName,String password, String old_username)throws SQLException, ClassNotFoundException {
-		String sql="update users set description='"+description+"',username='"+userName+"',password='"+password+"' where username='"+old_username+"' ";
+	public static void updatetUser(String description,String userName,String password, String old_desc)throws SQLException, ClassNotFoundException {
+		String sql="update users set description='"+description+"',username='"+userName+"',password='"+password+"' where description='"+old_desc+"' ";
 		try {
 			DBUtil.dbExecuteQuery(sql);
 			
@@ -32,6 +32,17 @@ public class UserDAO {
 		}
 	}
 	
+	public static void deletetUser(String description)throws SQLException, ClassNotFoundException {
+		String sql="delete from users where description='"+description+"'";
+		try {
+			DBUtil.dbExecuteQuery(sql);
+			
+		} catch (SQLException e) {
+			System.out.println("Error deleting record"+e);
+			e.printStackTrace();
+			throw e; 
+		}
+	}
 	
 //showing records
 	public static ObservableList<User> getAllRecords() throws ClassNotFoundException,SQLException{
