@@ -1,14 +1,11 @@
 package controller;
 
 import java.sql.SQLException;
-import java.util.TimerTask;
-
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -46,12 +43,12 @@ private void insertUser(ActionEvent event)throws Exception{
 		if (!isAnyFieldsBlank())
 		{
 			UserDAO.insertUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText());			
-			initialize();
-			clearFields();
+			refresh();
 		}			
 		
 	} catch (SQLException e) {
 		System.out.println("Hit error while inserting"+e);
+		
 		e.printStackTrace();
 		throw e; 
 	}
@@ -64,8 +61,7 @@ private void updateUser(ActionEvent event) throws Exception{
 		if (!isAnyFieldsBlank())
 		{
 			UserDAO.updatetUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText(), oldDesc);
-			initialize();
-			clearFields();
+			refresh();
 		}		
 		
 	} catch (SQLException e) {
@@ -83,8 +79,7 @@ private void deleteUser(ActionEvent event) throws Exception{
 		if (!(txtDescription.getText().isEmpty()))
 		{
 			UserDAO.deletetUser(txtDescription.getText());
-			initialize();
-			clearFields();
+			refresh();
 		}
 		
 		
@@ -98,21 +93,9 @@ private void deleteUser(ActionEvent event) throws Exception{
 
 @FXML
 private void searchUser(ActionEvent event) throws Exception{
-	try {
-		
-		if (!(txtDescription.getText().isEmpty()))
-		{
-			UserDAO.deletetUser(txtDescription.getText());
-			initialize();
-			clearFields();
-		}
-		
-		
-	} catch (SQLException e) {
-		System.out.println("Hit error while deleting"+e);
-		e.printStackTrace();
-		throw e; 
-	}
+    ObservableList<User> userList=UserDAO.searchUser(txtDescription.getText());    
+	populateTable(userList);
+	
 	
 }
 
@@ -131,7 +114,7 @@ public void clickItem(MouseEvent event)
 }
 
 @FXML
-private void clearFields(){
+private void refresh() throws Exception{
 	txtDescription.setText("");
 	txtUsername.setText("");
 	txtPassword.setText("");
@@ -139,6 +122,7 @@ private void clearFields(){
 	{
 	insertButton.setDisable(false);
     }
+	initialize();
 }
 
 

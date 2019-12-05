@@ -32,7 +32,7 @@
       <Label layoutX="45.0" layoutY="75.0" text="User Name" />
       <Label layoutX="45.0" layoutY="103.0" text="Password" />
       <Button layoutX="198.0" layoutY="142.0" mnemonicParsing="false" onAction="#updateUser" text="Update User" />
-      <Button layoutX="282.0" layoutY="142.0" mnemonicParsing="false" onAction="#clearFields" text="Clear" />
+      <Button layoutX="282.0" layoutY="142.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
       <Label layoutX="116.0" layoutY="123.0" text="All are required fields" textFill="#9e8e8e">
          <font>
             <Font name="System Italic" size="10.0" />
@@ -42,12 +42,12 @@
         <menus>
           <Menu mnemonicParsing="false" text="▷">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#clearFields" text="Clear" />
                   <MenuItem mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
                   <MenuItem mnemonicParsing="false" text="Change PIN" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
+      <Button layoutX="340.0" layoutY="142.0" mnemonicParsing="false" onAction="#searchUser" text="Search" />
    </children>
 </AnchorPane>
