@@ -5,13 +5,19 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.User;
 import model.UserDAO;
+import util.DBUtil;
 
 
 
@@ -34,8 +40,6 @@ private TableColumn<User, String> colUserName;
 private TableColumn<User, String> colPassword; 
 @FXML
 private TableView  userTable; 
-
-
 
 @FXML
 private void insertUser(ActionEvent event)throws Exception{
@@ -81,22 +85,19 @@ private void deleteUser(ActionEvent event) throws Exception{
 			UserDAO.deletetUser(txtDescription.getText());
 			refresh();
 		}
-		
-		
+				
 	} catch (SQLException e) {
 		System.out.println("Hit error while deleting"+e);
 		e.printStackTrace();
 		throw e; 
-	}
-	
+	}	
 }
 
 @FXML
 private void searchUser(ActionEvent event) throws Exception{
     ObservableList<User> userList=UserDAO.searchUser(txtDescription.getText());    
 	populateTable(userList);
-	
-	
+	clearFields();
 }
 
 @FXML
@@ -115,9 +116,7 @@ public void clickItem(MouseEvent event)
 
 @FXML
 private void refresh() throws Exception{
-	txtDescription.setText("");
-	txtUsername.setText("");
-	txtPassword.setText("");
+	clearFields();
 	if (insertButton.isDisable())
 	{
 	insertButton.setDisable(false);
@@ -125,6 +124,12 @@ private void refresh() throws Exception{
 	initialize();
 }
 
+
+private void clearFields() {
+	txtDescription.setText("");
+	txtUsername.setText("");
+	txtPassword.setText("");
+}
 
 
 @FXML
@@ -145,8 +150,7 @@ private void initialize()throws Exception{
 private void populateTable(ObservableList<User> userList) {
 	
 	userTable.setItems(userList);
-	
-	 
+		 
 }
 
 //validation checking if any text field is blank
@@ -157,6 +161,20 @@ private boolean isAnyFieldsBlank() {
 		status=true;
 	}
 	return status; 
+}
+
+@FXML
+private void ChangePIN(ActionEvent event) throws Exception {
+	
+	
+		Stage primaryStage=new Stage();
+		Parent root=FXMLLoader.load(getClass().getResource("/controller/ChangePin.fxml"));
+		Scene scene= new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.setTitle("PIN Management");
+		primaryStage.initStyle(StageStyle.UTILITY);
+		primaryStage.show();
+			
 }
 
 }

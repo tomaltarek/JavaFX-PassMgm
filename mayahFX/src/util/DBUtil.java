@@ -102,6 +102,35 @@ public class DBUtil {
 	
     }
    
-    
+    public static String dbGetPin() throws SQLException,ClassNotFoundException{
+        Statement statement=null; 
+        ResultSet rs=null; 
+        String sqlQuery="select pin from pin";
+        String value=null; 
+        
+        try {
+        	dbConnect();
+        	statement=connection.createStatement();
+        	rs=statement.executeQuery(sqlQuery);
+        	
+        	if (rs.next() ) {
+        	    value=rs.getString("pin");
+        	} 
+        	
+        	           
+    		
+    	} catch (Exception e) {
+    		System.out.println("Error getting pin"+e);
+    		throw e; 
+    	}
+        finally {
+    		if(rs!=null) rs.close();
+    		if (statement!=null) statement.close();
+    	}
+        dbDisconnect();
+        return value; 
+    	
+        }
+       
 }
 

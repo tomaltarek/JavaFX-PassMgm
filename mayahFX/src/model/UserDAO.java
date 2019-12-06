@@ -2,8 +2,6 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import util.DBUtil;
@@ -102,5 +100,18 @@ private static ObservableList<User> getUserObjects(ResultSet rSet) throws SQLExc
 	
 	
 }
+//for updating pin
+public static void updatePin(String old_pin,String new_pin)throws SQLException, ClassNotFoundException {
+	String sql="update pin set pin='"+new_pin+"' where pin='"+old_pin+"' ";
+	try {
+		DBUtil.dbExecuteQuery(sql);
+		
+	} catch (SQLException e) {
+		System.out.println("Error updating record"+e);
+		e.printStackTrace();
+		throw e; 
+	}
+}
+
 
 }

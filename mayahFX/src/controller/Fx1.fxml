@@ -43,7 +43,7 @@
           <Menu mnemonicParsing="false" text="▷">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
-                  <MenuItem mnemonicParsing="false" text="Change PIN" />
+                  <MenuItem mnemonicParsing="false" onAction="#ChangePIN" text="Change PIN" />
             </items>
           </Menu>
         </menus>
