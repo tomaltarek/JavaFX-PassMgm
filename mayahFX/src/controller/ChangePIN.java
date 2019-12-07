@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import model.UserDAO;
+import util.DBUtil;
 
 public class ChangePIN {
 @FXML	
@@ -25,9 +26,15 @@ private void updatePIN(ActionEvent event) throws Exception{
 	
 	try {
 		if (!isAnyFieldsBlank()) {
-			UserDAO.updatePin(passOldPin.getText(), passNewPin.getText());
-			lblStatus.setVisible(true);
-			lblStatus.setText("PIN changed successfully");
+			if (passOldPin.getText()==DBUtil.dbGetPin()) {
+				UserDAO.updatePin(passOldPin.getText(), passNewPin.getText());
+				lblStatus.setVisible(true);
+				lblStatus.setText("PIN changed successfully");
+			}
+			else {
+				lblStatus.setVisible(true);
+				lblStatus.setText("Old pin mismatch");
+			}
 		}
 									
 		

@@ -3,6 +3,8 @@ package controller;
 import java.sql.SQLException;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,8 @@ import util.DBUtil;
 
 
 public class UserController {
+@FXML
+private TextField filterField;	
 private String oldDesc=null; 
 @FXML
 private TextField txtDescription;
@@ -93,12 +97,12 @@ private void deleteUser(ActionEvent event) throws Exception{
 	}	
 }
 
-@FXML
-private void searchUser(ActionEvent event) throws Exception{
-    ObservableList<User> userList=UserDAO.searchUser(txtDescription.getText());    
-	populateTable(userList);
-	clearFields();
-}
+//@FXML
+//private void searchUser(ActionEvent event) throws Exception{
+//    ObservableList<User> userList=UserDAO.searchUser(txtDescription.getText());    
+//	populateTable(userList);
+//	clearFields();
+//}
 
 @FXML
 public void clickItem(MouseEvent event)
@@ -139,9 +143,38 @@ private void initialize()throws Exception{
 	colDescription.setCellValueFactory(cellData->new ReadOnlyStringWrapper( cellData.getValue().getDescription()));
 	colUserName.setCellValueFactory(cellData->new ReadOnlyStringWrapper( cellData.getValue().getUserName()));
 	colPassword.setCellValueFactory(cellData->new ReadOnlyStringWrapper( cellData.getValue().getPassword()));
-	ObservableList<User> userList=UserDAO.getAllRecords();
-	
-	populateTable(userList);
+	//1
+	FilteredList<User> filteredData = new FilteredList<>(UserDAO.getAllRecords(), p -> true);
+	//2
+	 filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+         filteredData.setPredicate(user -> {
+             // If filter text is empty, display all persons.
+             if (newValue == null || newValue.isEmpty()) {
+                 return true;
+             }
+             
+             // Compare first name and last name of every person with filter text.
+             String lowerCaseFilter = newValue.toLowerCase();
+             
+             if (user.getDescription().toLowerCase().contains(lowerCaseFilter)) {
+                 return true; // Filter matches description.
+             } else if (user.getUserName().toLowerCase().contains(lowerCaseFilter)) {
+                 return true; // Filter matches user name.
+             } else if (user.getPassword().toLowerCase().contains(lowerCaseFilter)) {
+                 return true; // Filter matches password.
+             }
+             clearFields();
+             return false; // Does not match.
+         });
+     });
+     
+	//3
+    SortedList<User> sortedData = new SortedList<>(filteredData);
+    // 4. Bind the SortedList comparator to the TableView comparator.
+    sortedData.comparatorProperty().bind(userTable.comparatorProperty());
+	//ObservableList<User> userList=UserDAO.getAllRecords();
+    populateTable(sortedData);
+	//populateTable(userList);
 	//noticeLabel.setVisible(false);
 	
 	

@@ -60,22 +60,22 @@ public class UserDAO {
 	
 	}
 // search option
-	public static ObservableList<User> searchUser(String userDesc) throws ClassNotFoundException,SQLException{
-		String sql="select * from users where description like '"+userDesc+"%'";
-				
-		try {
-			ResultSet rSet=DBUtil.dbExecute(sql);
-			ObservableList<User> userList=getUserObjects(rSet);			
-			return userList;
-			
-		} catch (Exception e) {
-			System.out.println("Error at searching users"+e);
-			e.printStackTrace();
-			throw e; 
-		}
-		
-	
-	}
+//	public static ObservableList<User> searchUser(String userDesc) throws ClassNotFoundException,SQLException{
+//		String sql="select * from users where description like '"+userDesc+"%'";
+//				
+//		try {
+//			ResultSet rSet=DBUtil.dbExecute(sql);
+//			ObservableList<User> userList=getUserObjects(rSet);			
+//			return userList;
+//			
+//		} catch (Exception e) {
+//			System.out.println("Error at searching users"+e);
+//			e.printStackTrace();
+//			throw e; 
+//		}
+//		
+//	
+//	}
 	
 private static ObservableList<User> getUserObjects(ResultSet rSet) throws SQLException,ClassNotFoundException {
 	try {

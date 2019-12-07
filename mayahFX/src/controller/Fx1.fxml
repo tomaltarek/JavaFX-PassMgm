@@ -17,7 +17,7 @@
       <Button fx:id="insertButton" layoutX="116.0" layoutY="142.0" mnemonicParsing="false" onAction="#insertUser" prefHeight="25.0" prefWidth="79.0" text="Add User" />
       <TextField fx:id="txtUsername" layoutX="116.0" layoutY="72.0" promptText="insert username" />
       <TextField fx:id="txtPassword" layoutX="116.0" layoutY="99.0" promptText="insert password" />
-      <TableView fx:id="userTable" layoutX="25.0" layoutY="174.0" onMousePressed="#clickItem" prefHeight="346.0" prefWidth="633.0" tableMenuButtonVisible="true">
+      <TableView fx:id="userTable" layoutX="25.0" layoutY="211.0" onMousePressed="#clickItem" prefHeight="309.0" prefWidth="633.0" tableMenuButtonVisible="true">
         <columns>
           <TableColumn fx:id="colDescription" prefWidth="276.0" text="Description" />
           <TableColumn fx:id="colUserName" prefWidth="170.0" text="User Name" />
@@ -48,6 +48,6 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Button layoutX="340.0" layoutY="142.0" mnemonicParsing="false" onAction="#searchUser" text="Search" />
+      <TextField fx:id="filterField" layoutX="116.0" layoutY="177.0" prefHeight="25.0" prefWidth="216.0" promptText="Search records" />
    </children>
 </AnchorPane>
