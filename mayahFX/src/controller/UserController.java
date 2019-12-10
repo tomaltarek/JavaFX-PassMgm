@@ -179,7 +179,7 @@ private void initialize()throws Exception{
 	//ObservableList<User> userList=UserDAO.getAllRecords();
     populateTable(sortedData);
 	
-    //prompt text 
+    //prompt text
     filterField.setPromptText("Search by Description, Userid or Passwords");
 
     PseudoClass empty = PseudoClass.getPseudoClass("empty");

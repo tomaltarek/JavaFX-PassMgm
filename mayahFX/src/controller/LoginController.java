@@ -28,7 +28,7 @@ private void initialize()throws Exception{
 	lblStatus.setVisible(false);
 	btnLogin.setDefaultButton(true);
 	
-	txtPIN.setPromptText("0000 by default");
+	//txtPIN.setPromptText("0000 by default");
 
      PseudoClass empty = PseudoClass.getPseudoClass("empty");
      txtPIN.pseudoClassStateChanged(empty, true);
@@ -48,6 +48,7 @@ private void login(ActionEvent event) throws Exception {
 			Scene scene= new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Joyee's Password Management System");
+			primaryStage.resizableProperty().setValue(Boolean.FALSE);
 			primaryStage.show();
 			closeLogin();
 		}

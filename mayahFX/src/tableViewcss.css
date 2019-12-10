@@ -56,3 +56,25 @@
    -fx-background-color:#ffd633;
        
 }
+
+.menu-item.label {
+  
+    -fx-font-family:tahoma;
+    -fx-font-size: 12px;
+    
+}
+
+.menu-item:focused .label {
+  -fx-text-fill: white;
+}
+.menu-item{
+    -fx-border-color: #DDDEE2 transparent #B9C0C8 transparent;
+    -fx-background-radius: 30;
+    -fx-border-width:0.50px;
+
+}
+.menu-item:focused {
+     -fx-background: -fx-accent;
+     -fx-background-color:#ffbf00;
+     -fx-text-fill: -fx-selection-bar-text;
+}
