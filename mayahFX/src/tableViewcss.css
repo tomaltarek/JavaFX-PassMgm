@@ -1,0 +1,58 @@
+.root{
+   
+   
+}
+
+.button{  
+ -fx-background-color: 
+        #c3c4c4,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+    
+}
+.textfield:selected{
+	-fx-background-color: #ffff99;
+}
+
+.button:hover {
+        -fx-background: linear-gradient(to bottom, #cc6600 0%, #ffcc00 100%);
+        -fx-background-color:#ffbf00;
+        -fx-text-fill:white;
+        -fx-scale-y: 1.1;
+}
+
+.text-field {
+    
+    -fx-background-radius: 25;
+    -fx-prompt-text-fill: gray;
+   
+}
+
+
+.text-field:empty .text {
+    -fx-effect: null ;
+}
+.text-field:focused {
+    -fx-background-color:#ffeb99;
+    
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}
+.table-view .column-header .label{
+  
+   -fx-alignment: CENTER_LEFT;
+}
+
+.table-row-cell{
+   -fx-font-size:14;
+}
+
+.table-row-cell:selected {
+   
+    -fx-font-size:15;
+   -fx-background-color:#ffd633;
+       
+}

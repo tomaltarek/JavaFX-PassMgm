@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="132.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="132.0" prefWidth="300.0" stylesheets="@../tableViewcss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <Button layoutX="219.0" layoutY="42.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="49.0" text="Log in" />
       <PasswordField fx:id="txtPIN" layoutX="34.0" layoutY="43.0" prefHeight="30.0" prefWidth="183.0" promptText="0000 is default">
          <font>
             <Font size="14.0" />
          </font>
       </PasswordField>
+      <Button fx:id="btnLogin" layoutX="219.0" layoutY="42.0" mnemonicParsing="false" onAction="#login" prefHeight="30.0" prefWidth="49.0" text="Log in" />
       <Label fx:id="lblStatus" layoutX="35.0" layoutY="77.0" text="Status" textFill="#da7848" />
       <Label layoutX="37.0" layoutY="23.0" text="Enter PIN" />
    </children>

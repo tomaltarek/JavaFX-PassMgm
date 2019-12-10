@@ -12,14 +12,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="534.0" prefWidth="674.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserController">
+<AnchorPane prefHeight="534.0" prefWidth="674.0" styleClass="Theme" stylesheets="@../tableViewcss.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserController">
    <children>
-      <Button fx:id="insertButton" layoutX="116.0" layoutY="142.0" mnemonicParsing="false" onAction="#insertUser" prefHeight="25.0" prefWidth="79.0" text="Add User" />
-      <TextField fx:id="txtUsername" layoutX="116.0" layoutY="72.0" promptText="insert username" />
-      <TextField fx:id="txtPassword" layoutX="116.0" layoutY="99.0" promptText="insert password" />
-      <TableView fx:id="userTable" layoutX="25.0" layoutY="211.0" onMousePressed="#clickItem" prefHeight="309.0" prefWidth="633.0" tableMenuButtonVisible="true">
+      <TextField fx:id="filterField" layoutX="116.0" layoutY="42.0" prefHeight="25.0" prefWidth="438.0" promptText="Search records">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtDescription" layoutX="116.0" layoutY="80.0" prefHeight="25.0" prefWidth="296.0" promptText="insert description" />
+      <TextField fx:id="txtUsername" layoutX="116.0" layoutY="107.0" promptText="insert username" />
+      <TextField fx:id="txtPassword" layoutX="116.0" layoutY="134.0" promptText="insert password" />
+      <Button fx:id="insertButton" layoutX="116.0" layoutY="177.0" mnemonicParsing="false" onAction="#insertUser" prefHeight="25.0" prefWidth="79.0" text="Add User" />
+      <TableView fx:id="userTable" layoutX="25.0" layoutY="211.0" onMousePressed="#clickItem" prefHeight="309.0" prefWidth="633.0" stylesheets="@../tableViewcss.css" tableMenuButtonVisible="true">
         <columns>
-          <TableColumn fx:id="colDescription" prefWidth="276.0" text="Description" />
+          <TableColumn fx:id="colDescription" prefWidth="276.0" style="-fx-alignment: LEFT;" text="Description" />
           <TableColumn fx:id="colUserName" prefWidth="170.0" text="User Name" />
             <TableColumn fx:id="colPassword" prefWidth="186.0" text="Password" />
         </columns>
@@ -27,13 +33,12 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </TableView>
-      <TextField fx:id="txtDescription" layoutX="116.0" layoutY="45.0" prefHeight="25.0" prefWidth="296.0" promptText="insert description" />
-      <Label layoutX="44.0" layoutY="49.0" text="Description" />
-      <Label layoutX="45.0" layoutY="75.0" text="User Name" />
-      <Label layoutX="45.0" layoutY="103.0" text="Password" />
-      <Button layoutX="198.0" layoutY="142.0" mnemonicParsing="false" onAction="#updateUser" text="Update User" />
-      <Button layoutX="282.0" layoutY="142.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
-      <Label layoutX="116.0" layoutY="123.0" text="All are required fields" textFill="#9e8e8e">
+      <Label layoutX="44.0" layoutY="84.0" text="Description" />
+      <Label layoutX="45.0" layoutY="110.0" text="User Name" />
+      <Label layoutX="45.0" layoutY="138.0" text="Password" />
+      <Button layoutX="198.0" layoutY="177.0" mnemonicParsing="false" onAction="#updateUser" text="Update User" />
+      <Button layoutX="282.0" layoutY="177.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+      <Label layoutX="122.0" layoutY="159.0" text="All are required fields" textFill="#9e8e8e">
          <font>
             <Font name="System Italic" size="10.0" />
          </font>
@@ -48,6 +53,5 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TextField fx:id="filterField" layoutX="116.0" layoutY="177.0" prefHeight="25.0" prefWidth="216.0" promptText="Search records" />
    </children>
 </AnchorPane>

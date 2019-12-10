@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import model.UserDAO;
@@ -16,25 +17,34 @@ private PasswordField passOldPin;
 private PasswordField passNewPin;
 @FXML
 private Label lblStatus;
+@FXML
+private Button btnSave;
 
 @FXML
 private void initialize()throws Exception{
 	lblStatus.setVisible(false);
+	btnSave.setDefaultButton(true);
 }
 @FXML
 private void updatePIN(ActionEvent event) throws Exception{
 	
 	try {
 		if (!isAnyFieldsBlank()) {
-			if (passOldPin.getText()==DBUtil.dbGetPin()) {
+			if (passOldPin.getText().equals(DBUtil.dbGetPin())) {
 				UserDAO.updatePin(passOldPin.getText(), passNewPin.getText());
 				lblStatus.setVisible(true);
 				lblStatus.setText("PIN changed successfully");
 			}
 			else {
 				lblStatus.setVisible(true);
-				lblStatus.setText("Old pin mismatch");
+				lblStatus.setText(passOldPin.getText());
+				 System.out.println("tomal"+DBUtil.dbGetPin()+"tomal");
 			}
+		}
+		
+		else {
+			lblStatus.setVisible(true);
+			lblStatus.setText("Fields cannot be blank");
 		}
 									
 		

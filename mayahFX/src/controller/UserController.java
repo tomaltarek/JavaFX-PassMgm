@@ -5,6 +5,7 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,7 @@ private TextField txtDescription;
 private TextField txtUsername;
 @FXML
 private TextField txtPassword; 
+
 @FXML
 private Button insertButton;
 
@@ -50,7 +52,8 @@ private void insertUser(ActionEvent event)throws Exception{
 	try {
 		if (!isAnyFieldsBlank())
 		{
-			UserDAO.insertUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText());			
+			// replace is used to avoid error on string with single quote
+			UserDAO.insertUser(txtDescription.getText().replace("'", "''"), txtUsername.getText().replace("'", "''"), txtPassword.getText().replace("'", "''"));			
 			refresh();
 		}			
 		
@@ -68,7 +71,8 @@ private void updateUser(ActionEvent event) throws Exception{
 	try {
 		if (!isAnyFieldsBlank())
 		{
-			UserDAO.updatetUser(txtDescription.getText(), txtUsername.getText(), txtPassword.getText(), oldDesc);
+			//replace is used to avoid error if string contains signle qoute 
+			UserDAO.updatetUser(txtDescription.getText().replace("'", "''"), txtUsername.getText().replace("'", "''"), txtPassword.getText().replace("'", "''"), oldDesc.replace("'", "''"));
 			refresh();
 		}		
 		
@@ -174,9 +178,17 @@ private void initialize()throws Exception{
     sortedData.comparatorProperty().bind(userTable.comparatorProperty());
 	//ObservableList<User> userList=UserDAO.getAllRecords();
     populateTable(sortedData);
-	//populateTable(userList);
-	//noticeLabel.setVisible(false);
 	
+    //prompt text 
+    filterField.setPromptText("Search by Description, Userid or Passwords");
+
+    PseudoClass empty = PseudoClass.getPseudoClass("empty");
+    filterField.pseudoClassStateChanged(empty, true);
+    filterField.textProperty().addListener((obs, oldText, newText) -> {
+    filterField.pseudoClassStateChanged(empty, newText.isEmpty());
+    });
+	
+    
 	
 }
 
