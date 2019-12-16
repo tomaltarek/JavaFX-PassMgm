@@ -48,6 +48,7 @@
 
 .table-row-cell{
    -fx-font-size:14;
+   -fx-alignment: CENTER_LEFT;
 }
 
 .table-row-cell:selected {

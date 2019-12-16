@@ -6,12 +6,12 @@ import javafx.beans.property.StringProperty;
 public class User {
 	private SimpleStringProperty descriptionProperty;
 	private StringProperty userNameProperty;
-	private StringProperty passwordProperty; 
-	
+	private StringProperty passwordProperty;
+
 	public User() {
-		this.descriptionProperty=new SimpleStringProperty();
-		this.userNameProperty=new SimpleStringProperty();
-		this.passwordProperty=new SimpleStringProperty(); 
+		this.descriptionProperty = new SimpleStringProperty();
+		this.userNameProperty = new SimpleStringProperty();
+		this.passwordProperty = new SimpleStringProperty();
 	}
 
 	public String getDescription() {
@@ -37,7 +37,5 @@ public class User {
 	public void setPassword(String pwd) {
 		this.passwordProperty.set(pwd);
 	}
-	
-	
 
 }

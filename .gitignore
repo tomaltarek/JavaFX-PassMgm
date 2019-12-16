@@ -1,5 +1,4 @@
 /bin/
-*.txt
 *.lck
 *.ctrl
 *.properties
@@ -7,6 +6,8 @@
 .metadata
 bin/
 tmp/
+tomaldb/
+DevelopmentLog.txt
 *.tmp
 *.bak
 *.dat

@@ -23,9 +23,9 @@
       <TextField fx:id="txtUsername" layoutX="116.0" layoutY="107.0" promptText="Username" />
       <TextField fx:id="txtPassword" layoutX="116.0" layoutY="134.0" promptText="insert password" />
       <Button fx:id="insertButton" layoutX="116.0" layoutY="177.0" mnemonicParsing="false" onAction="#insertUser" prefHeight="25.0" prefWidth="79.0" text="Add User" />
-      <TableView fx:id="userTable" layoutX="30.0" layoutY="211.0" onMousePressed="#clickItem" prefHeight="309.0" prefWidth="661.0" stylesheets="@../tableViewcss.css" tableMenuButtonVisible="true">
+      <TableView fx:id="userTable" layoutX="30.0" layoutY="211.0" onMousePressed="#clickItem" prefHeight="304.0" prefWidth="661.0" stylesheets="@../tableViewcss.css" tableMenuButtonVisible="true">
         <columns>
-          <TableColumn fx:id="colDescription" prefWidth="276.0" style="-fx-alignment: LEFT;" text="Description" />
+          <TableColumn fx:id="colDescription" prefWidth="276.0" text="Description" />
           <TableColumn fx:id="colUserName" prefWidth="170.0" text="User Name" />
             <TableColumn fx:id="colPassword" prefWidth="186.0" text="Password" />
         </columns>
@@ -40,9 +40,9 @@
             <Font name="System Italic" size="10.0" />
          </font>
       </Label>
-      <MenuBar layoutX="671.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.7" prefHeight="25.0" prefWidth="29.0">
+      <MenuBar layoutX="671.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.7" prefHeight="25.0" prefWidth="44.0">
         <menus>
-          <Menu mnemonicParsing="false" text="▷">
+          <Menu mnemonicParsing="false" text="☰">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#deleteUser" text="Delete User" />
                   <MenuItem mnemonicParsing="false" onAction="#ChangePIN" text="Change PIN" />
@@ -50,5 +50,10 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Label layoutX="300.0" layoutY="524.0" text="© 2019 ,Tomal Tarek ">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
